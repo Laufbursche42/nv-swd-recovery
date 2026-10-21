@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# pre-push hook for nv-swd-recovery: changelog-before-push guard + full-tree security gate.
+# The per-commit cache-buster bump plus changelog enforcement live in .githooks/pre-commit;
+# this is the last gate before the code leaves the machine.
+#
+# Bypass:  git push --no-verify
+# Activated via: git config core.hooksPath .githooks
+
+set -u
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+cd "$REPO_ROOT" || exit 0
+
+echo "----- pre-push: changelog + security gate -----------------------"
+RC=0
+if command -v py >/dev/null 2>&1; then PY="py -3"; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=python; fi
+
+# 1) The changelog must carry an entry for the version being pushed (the BUILD cache-buster),
+#    in both languages, so a release can never ship without its changelog line.
+MAIN=""
+for c in page.js app.js; do
+  if [ -f "$c" ] && grep -qE "BUILD *= *['\"]v[0-9]+['\"]" "$c"; then MAIN="$c"; break; fi
+done
+if [ -n "$MAIN" ]; then
+  VER=$(sed -nE "s/.*BUILD *= *['\"]v([0-9]+)['\"].*/\1/p" "$MAIN" | head -1)
+  if [ -n "$VER" ]; then
+    for cl in CHANGELOG.md CHANGELOG.DE.md; do
+      if [ ! -f "$cl" ]; then echo "BLOCK: $cl is missing (needs a '## v$VER' entry)."; RC=1; continue; fi
+      if grep -qE "^## v$VER([^0-9]|\$)" "$cl"; then echo "changelog OK: $cl has v$VER"
+      else echo "BLOCK: no '## v$VER' entry in $cl -> add it (newest first) before pushing."; RC=1; fi
+    done
+  fi
+fi
+
+# 2) Full-tree security gate: syntax-check every tracked JS plus the web security scan (if present).
+for f in $(git ls-files '*.js'); do
+  if node --check "$f"; then echo "PASS [js] $f"; else echo "FAIL [js] $f"; RC=1; fi
+done
+if [ -f scripts/security-scan.py ]; then
+  $PY scripts/security-scan.py || RC=1
+fi
+
+echo "-----------------------------------------------------------------"
+if [ "$RC" -ne 0 ]; then
+  echo "pre-push BLOCKED. Fix the issues above (bypass a genuine false positive with: git push --no-verify)."
+  exit 1
+fi
+echo "pre-push PASSED."
+exit 0

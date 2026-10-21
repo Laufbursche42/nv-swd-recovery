@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!-- Offline-first, all 'self'. The IAP is fetched same-origin; stock-firmware links open in a new tab, never fetched. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-t="pageTitle">Laufbursche SWD Recovery for Navee</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Laufbursche <span data-t="brandSub">SWD Recovery for Navee</span></h1>
+    <div class="head-right">
+      <div class="head-tools">
+        <button type="button" class="theme-btn" id="btn-theme" aria-label="Theme">&#9728;</button>
+        <div class="langs" id="langs" role="group" aria-label="Language">
+          <button type="button" data-lang="de" aria-pressed="true">DE</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- what it is -->
+  <div class="card">
+    <h2 data-t="introTitle"></h2>
+    <p class="hint" data-t="introLede"></p>
+  </div>
+
+  <!-- limits + risk -->
+  <div class="card">
+    <h2 data-t="limitsTitle"></h2>
+    <div class="warn" data-t="limitsBody"></div>
+  </div>
+
+  <!-- step 1: get stock firmware -->
+  <div class="card">
+    <h2 data-t="step1Title"></h2>
+    <p class="hint" data-t="step1Hint"></p>
+    <div id="fw-list"></div>
+    <p class="hint" data-t="step1More"></p>
+  </div>
+
+  <!-- step 2: upload + build -->
+  <div class="card">
+    <h2 data-t="step2Title"></h2>
+    <p class="hint" data-t="step2Intro"></p>
+    <p><input type="file" id="file" accept=".bin"></p>
+    <div id="result" class="hint"></div>
+    <div class="btns"><button type="button" class="primary span2" id="dl" data-t="dlBtn" hidden></button></div>
+  </div>
+
+  <!-- step 3: flash via SWD -->
+  <div class="card">
+    <h2 data-t="step3Title"></h2>
+    <p class="hint" data-t="step3Lede"></p>
+    <div class="btns">
+      <a class="get" id="link-readme" href="README.md" data-doc="README" target="_blank" rel="noopener" data-t="footReadme"></a>
+      <a class="get" id="link-script" href="swd_flash_navee.py" download data-t="footScript"></a>
+    </div>
+    <p class="hint" data-t="step3Short"></p>
+    <p class="hint" data-t="legalNote"></p>
+  </div>
+
+  <footer class="foot">
+    <span class="foot-links">
+      <a href="README.md" data-doc="README" target="_blank" rel="noopener" data-t="footReadme"></a>
+      <a href="CHANGELOG.md" data-doc="CHANGELOG" target="_blank" rel="noopener" data-t="footChangelog"></a>
+      <a href="DISCLAIMER.md" data-doc="DISCLAIMER" target="_blank" rel="noopener" data-t="footDisclaimer"></a>
+      <a href="LICENSE.md" data-doc="LICENSE" target="_blank" rel="noopener" data-t="footLicense"></a>
+      <a href="PRIVACY.md" data-doc="PRIVACY" target="_blank" rel="noopener" data-t="footPrivacy"></a>
+      <a href="TRADEMARKS.md" data-doc="TRADEMARKS" target="_blank" rel="noopener" data-t="footTrademarks"></a>
+    </span>
+    <span class="ver"><span id="build-ver"></span> - <a href="https://github.com/Laufbursche42/Laufbursche42/issues" target="_blank" rel="noopener" data-t="footReport"></a></span>
+    <a class="foot-copy" href="https://laufbursche42.github.io/Laufbursche42/" target="_blank" rel="noopener">Copyright (c) 2026 Laufbursche</a>
+  </footer>
+</div>
+
+<!-- document viewer (renders Markdown in-page, like the other LB tools) -->
+<dialog id="doc" aria-labelledby="doc-title">
+  <div class="doc-head"><h3 id="doc-title"></h3><button type="button" id="doc-x">&times;</button></div>
+  <div class="doc-body" id="doc-body"></div>
+  <div class="doc-foot"><button type="button" id="doc-close" data-t="docClose"></button></div>
+</dialog>
+
+<script defer src="i18n/ui.js?v=1"></script>
+<script defer src="app.js?v=1"></script>
+<script defer src="report-footer.js?v=1"></script>
+</body>
+</html>
