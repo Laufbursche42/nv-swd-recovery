@@ -5,13 +5,16 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<!-- Offline-first, all 'self'. The IAP is fetched same-origin; stock-firmware links open in a new tab, never fetched. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<!-- Offline-first, all 'self'. The IAP is fetched same-origin; stock-firmware links open in a new tab, never fetched. Cloudflare Web Analytics beacon is the only allowed third-party origin. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-t="pageTitle">Laufbursche SWD Recovery for Navee</title>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=2">
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "76c1c5babfbf4e498db6d69b0db369a1"}'></script><!-- scan-ok: Cloudflare Web Analytics beacon (token starts 76c1c5 ends 69a1); cookieless aggregate page metrics, see PRIVACY -->
+<!-- End Cloudflare Web Analytics -->
 </head>
 <body>
 <div class="wrap">
@@ -90,8 +93,8 @@
   <div class="doc-foot"><button type="button" id="doc-close" data-t="docClose"></button></div>
 </dialog>
 
-<script defer src="i18n/ui.js?v=1"></script>
-<script defer src="app.js?v=1"></script>
-<script defer src="report-footer.js?v=1"></script>
+<script defer src="i18n/ui.js?v=2"></script>
+<script defer src="app.js?v=2"></script>
+<script defer src="report-footer.js?v=2"></script>
 </body>
 </html>

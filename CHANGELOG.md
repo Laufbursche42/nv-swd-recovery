@@ -1,5 +1,9 @@
 # Changelog
 
+## v2
+
+- Enable Cloudflare Web Analytics (cookieless, aggregate page metrics only); allow the beacon origin in the Content-Security-Policy.
+
 ## v1
 
 - First release. Builds a flash-ready SWD image (IAP bootloader and app) in the browser from an official NAVEE 02831 controller stock image.

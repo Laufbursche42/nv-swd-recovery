@@ -1,5 +1,9 @@
 # Changelog
 
+## v2
+
+- Cloudflare Web Analytics aktiviert (cookielos, nur aggregierte Seitenaufrufe); Beacon-Quelle in der Content-Security-Policy erlaubt.
+
 ## v1
 
 - Erste Version. Baut im Browser aus einem offiziellen NAVEE-02831-Controller-Stock-Image ein flash-fertiges SWD-Abbild (IAP-Bootloader und App).

@@ -2,7 +2,7 @@
 // SWD-recovery shell. Same i18n/theme/language mechanics as the other Laufbursche tools
 // (shared localStorage keys), plus client-side detect + assemble of the IAP+app image.
 (function () {
-  var BUILD = 'v1';
+  var BUILD = 'v2';
   var IAP_URL = 'assets/navee_02831_iap.bin';
   var IAP_SIZE = 0x3000, OTA_HEADER = 0x100;
 
