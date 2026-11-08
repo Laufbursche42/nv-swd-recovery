@@ -1,5 +1,9 @@
 # Changelog
 
+## v3
+
+- Fehler-melden: das Markdown-Fett (`**`) aus der auto-gefüllten Ticket-Vorlage entfernt. Das Fett rendert teils nicht (ein Leerzeichen vor dem schließenden Marker) oder war unbalanciert, sodass rohe Sterne im Ticket standen. Die Labels sind jetzt Klartext.
+
 ## v2
 
 - Cloudflare Web Analytics aktiviert (cookielos, nur aggregierte Seitenaufrufe); Beacon-Quelle in der Content-Security-Policy erlaubt.

@@ -1,5 +1,9 @@
 # Changelog
 
+## v3
+
+- Issue report: removed the Markdown bold (`**`) from the auto-filled ticket. The bold either did not render (a space before the closing marker) or came out unbalanced, so raw asterisks were left in the ticket. The labels are plain text now.
+
 ## v2
 
 - Enable Cloudflare Web Analytics (cookieless, aggregate page metrics only); allow the beacon origin in the Content-Security-Policy.
